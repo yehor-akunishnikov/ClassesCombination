@@ -9,9 +9,6 @@ export class DomManipulator extends DomManipulatorAbstract {
     const listItem = super.createDomElement('li', entity);
 
     listItem.innerText = `Name: ${entity.name}`;
-    listItem.addEventListener('click', () => {
-      this.broadcast(entity);
-    });
 
     return listItem;
   }

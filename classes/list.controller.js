@@ -32,14 +32,6 @@ export class ListController extends ControllerAbstract {
       { id: 'randomId2', name: 'Joka' },
       { id: 'randomId3', name: 'Boka' },
     ]);
-
-    const subId = this.subscribe((...data) => {
-      console.log(data);
-    });
-
-    setTimeout(() => {
-      this.unsubscribe(subId);
-    }, 5000);
   }
 
   loadOne(event) {

@@ -1,7 +1,7 @@
 import { Observer } from '../util-classes/observer.js';
 
 export class ControllerAbstract {
-  _subscriptions = [];
+  _subscriptions = {};
 
   constructor(listenersList, domManipulator) {
     if (domManipulator) {
@@ -24,21 +24,17 @@ export class ControllerAbstract {
   subscribe(callBack) {
     const subId = (Math.random() + 1).toString(36).substring(7);
 
-    this._subscriptions.push({ subId, callBack });
+    this._subscriptions[subId] = callBack;
     this._actionObserver.subscribe(callBack);
 
     return subId;
   }
 
   unsubscribe(subId) {
-    const subscription = this._subscriptions.filter(
-      (sub) => sub.subId === subId
-    );
+    const subscription = this._subscriptions[subId];
 
-    this._actionObserver.unsubscribe(subscription.callBack);
+    this._actionObserver.unsubscribe(subscription);
 
-    this._subscriptions = this._subscriptions.filter(
-      (sub) => sub.subId !== subId
-    );
+    delete this._subscriptions[subId];
   }
 }
