@@ -1,28 +1,27 @@
-export class ListController {
-  constructor(domManipulator, domLinks) {
+import { Controller } from '../abstract-classes/controller.js';
+
+export class ListController extends Controller {
+  constructor(domManipulator) {
+    super([
+      {
+        id: 'load-one-form',
+        events: [{ name: 'submit', method: 'loadOne' }],
+      },
+      {
+        id: 'update-form',
+        events: [{ name: 'submit', method: 'update' }],
+      },
+      {
+        id: 'remove-form',
+        events: [{ name: 'submit', method: 'remove' }],
+      },
+      {
+        id: 'load-all-btn',
+        events: [{ name: 'click', method: 'loadAll' }],
+      },
+    ]);
+
     this.domManipulator = domManipulator;
-    this.domLinks = domLinks;
-  }
-
-  init() {
-    this.domLinks.loadAllBtn.addEventListener('click', () => {
-      this.loadAll();
-    });
-
-    this.domLinks.loadOneForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.loadOne();
-    });
-
-    this.domLinks.updateForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.update();
-    });
-
-    this.domLinks.removeForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.remove();
-    });
   }
 
   loadAll() {
@@ -33,24 +32,30 @@ export class ListController {
     ]);
   }
 
-  loadOne() {
-    const formData = new FormData(this.domLinks.loadOneForm);
+  loadOne(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
 
     for (let item of formData.values()) {
       console.log(item);
     }
   }
 
-  update() {
-    const formData = new FormData(this.domLinks.updateForm);
+  update(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
 
     for (let item of formData.values()) {
       console.log(item);
     }
   }
 
-  remove() {
-    const formData = new FormData(this.domLinks.removeForm);
+  remove(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
 
     for (let item of formData.values()) {
       console.log(item);
