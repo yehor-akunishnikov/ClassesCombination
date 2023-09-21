@@ -1,44 +1,28 @@
-export class DomManipulator {
-  constructor({ root, attachTo } = {}) {
-    if (root) {
-      this.root = root;
-    } else {
-      this.createRoot(attachTo);
-    }
-  }
+import { DomManipulatorAbstract } from '../abstract-classes/dom-manipulator-abstract.js';
 
-  createRoot(attachTo) {
-    this.root = document.createElement('ul');
-
-    document.getElementById(attachTo).appendChild(this.root);
+export class DomManipulator extends DomManipulatorAbstract {
+  constructor(config) {
+    super(config);
   }
 
   createListItem(entity) {
-    const liElement = document.createElement('li');
+    const listItem = super.createDomElement('li', entity);
 
-    liElement.innerText = `Name: ${entity.name}`;
-    liElement.setAttribute('data-identifier', entity.id);
+    listItem.innerText = `Name: ${entity.name}`;
+    listItem.addEventListener('click', () => {
+      this.broadcast(entity);
+    });
 
-    return liElement;
-  }
-
-  findElementById(id) {
-    const selector = `[data-identifier="${id}"]`;
-
-    return this.root.querySelector(selector);
+    return listItem;
   }
 
   renderList(entityList) {
-    this.root.replaceChildren();
+    super.clearRoot();
     entityList.forEach((entity) => this.addElement(entity));
   }
 
   addElement(entity) {
     this.root.append(this.createListItem(entity));
-  }
-
-  removeElement(id) {
-    this.root.removeChild(this.findElementById(id));
   }
 
   updateElement(id, payload) {

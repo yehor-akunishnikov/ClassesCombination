@@ -1,27 +1,29 @@
-import { Controller } from '../abstract-classes/controller.js';
+import { ControllerAbstract } from '../abstract-classes/controller-abstract.js';
+import { DomManipulator } from './dom-manipulator.js';
 
-export class ListController extends Controller {
-  constructor(domManipulator) {
-    super([
-      {
-        id: 'load-one-form',
-        events: [{ name: 'submit', method: 'loadOne' }],
-      },
-      {
-        id: 'update-form',
-        events: [{ name: 'submit', method: 'update' }],
-      },
-      {
-        id: 'remove-form',
-        events: [{ name: 'submit', method: 'remove' }],
-      },
-      {
-        id: 'load-all-btn',
-        events: [{ name: 'click', method: 'loadAll' }],
-      },
-    ]);
-
-    this.domManipulator = domManipulator;
+export class ListController extends ControllerAbstract {
+  constructor() {
+    super(
+      [
+        {
+          id: 'load-one-form',
+          events: [{ name: 'submit', method: 'loadOne' }],
+        },
+        {
+          id: 'update-form',
+          events: [{ name: 'submit', method: 'update' }],
+        },
+        {
+          id: 'remove-form',
+          events: [{ name: 'submit', method: 'remove' }],
+        },
+        {
+          id: 'load-all-btn',
+          events: [{ name: 'click', method: 'loadAll' }],
+        },
+      ],
+      new DomManipulator({ attachTo: 'app' })
+    );
   }
 
   loadAll() {
@@ -30,6 +32,14 @@ export class ListController extends Controller {
       { id: 'randomId2', name: 'Joka' },
       { id: 'randomId3', name: 'Boka' },
     ]);
+
+    const subId = this.subscribe((...data) => {
+      console.log(data);
+    });
+
+    setTimeout(() => {
+      this.unsubscribe(subId);
+    }, 5000);
   }
 
   loadOne(event) {
