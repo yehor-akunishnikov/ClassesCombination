@@ -1,1 +1,40 @@
-<div id="app"></div>
+<div id="app">
+  <h1>Crud app example</h1>
+
+  <form id="load-one-form">
+    <h2>Load item (API Call + Store + DOM)</h2>
+    <p>
+      itemId
+      <input id="load-one-form-id" name="id" type="text" />
+    </p>
+    <button type="submit">Load</button>
+  </form>
+
+  <form id="remove-form">
+    <h2>Remove item (Store + DOM)</h2>
+    <p>
+      itemId
+      <input id="remove-form-id" name="id" type="text" />
+    </p>
+    <button type="submit">Remove</button>
+  </form>
+
+  <form id="update-form">
+    <h2>Update item (Store + DOM)</h2>
+    <p>
+      itemId
+      <input id="update-form-id" name="id" type="text" />
+    </p>
+
+    <p>
+      itemName
+      <input id="update-form-name" name="name" type="text" />
+    </p>
+    <button type="submit">Update</button>
+  </form>
+
+  <h2>Load all (API Call + Store + DOM)</h2>
+  <button id="load-all-btn">Load All Data</button>
+
+  <h2>List</h2>
+</div>

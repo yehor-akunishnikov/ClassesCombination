@@ -1,3 +1,27 @@
-h1, h2 {
-  font-family: Lato;
+html {
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: 1.25rem;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 0.75rem;
+}
+
+form {
+  margin-bottom: 20px;
+  padding: 10px;
+
+  border: 1px solid #000;
+}
+
+ul {
+  border: 1px solid #000;
 }

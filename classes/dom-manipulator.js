@@ -29,6 +29,7 @@ export class DomManipulator {
   }
 
   renderList(entityList) {
+    this.root.replaceChildren();
     entityList.forEach((entity) => this.addElement(entity));
   }
 
