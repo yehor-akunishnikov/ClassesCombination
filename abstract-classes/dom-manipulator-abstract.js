@@ -56,7 +56,7 @@ export class DomManipulatorAbstract {
     this.root.removeChild(this.findElementById(id));
   }
 
-  // Basic method which removed all child nodes from root element
+  // Basic method which removes all child nodes from the root element
   clearRoot() {
     this.root.replaceChildren();
   }
