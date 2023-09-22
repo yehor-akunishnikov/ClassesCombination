@@ -12,6 +12,15 @@ export class DomManipulatorAbstract {
       this.root = root;
     } else {
       this.root = document.createElement(tag);
+
+      if (tag === 'ul') {
+        this.root.innerHTML =
+          '<li>For now it is empty. Click "Load All Data", it already works</li>';
+      } else {
+        this.root.innerHTML =
+          '<span>For now it is empty. Click "Load All Data", it already works</span>';
+      }
+
       document.getElementById(attachTo).appendChild(this.root);
     }
   }
