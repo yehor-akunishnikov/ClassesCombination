@@ -1,9 +1,20 @@
 import { ControllerAbstract } from '../abstract-classes/controller-abstract.js';
 import { DomManipulator } from './dom-manipulator.js';
 
+/*
+  Main entry point to your feature
+  Here you will add general logic by using methods of your helper classes together
+*/
 export class ListController extends ControllerAbstract {
   constructor() {
+    /*
+      Pass your dependencies here
+      For ex:
+        restService,
+        store,
+    */
     super(
+      // There's a lot going on under the hood, but skip that part for now
       [
         {
           id: 'load-one-form',
@@ -22,16 +33,28 @@ export class ListController extends ControllerAbstract {
           events: [{ name: 'click', method: 'loadAll' }],
         },
       ],
-      new DomManipulator({ attachTo: 'app' })
+
+      // DomManipulator is already available via "this",
+      // Please check "loadAll" method to see the example of its usage
+      new DomManipulator({ attachTo: 'app', tag: 'ul' })
     );
+
+    /*
+      Add your dependencies here
+      For ex:
+        this.restService = restService;
+    */
   }
 
   loadAll() {
+    // Rendering sample
     this.domManipulator.renderList([
       { id: 'randomId', name: 'Oleg' },
       { id: 'randomId2', name: 'Joka' },
       { id: 'randomId3', name: 'Boka' },
     ]);
+
+    // Load list of items from server and render
   }
 
   loadOne(event) {
@@ -39,9 +62,7 @@ export class ListController extends ControllerAbstract {
 
     const formData = new FormData(event.target);
 
-    for (let item of formData.values()) {
-      console.log(item);
-    }
+    // Load item from server and render
   }
 
   update(event) {
@@ -49,9 +70,7 @@ export class ListController extends ControllerAbstract {
 
     const formData = new FormData(event.target);
 
-    for (let item of formData.values()) {
-      console.log(item);
-    }
+    // Update item on server and update DOM
   }
 
   remove(event) {
@@ -59,8 +78,6 @@ export class ListController extends ControllerAbstract {
 
     const formData = new FormData(event.target);
 
-    for (let item of formData.values()) {
-      console.log(item);
-    }
+    // Remove item both on server and in DOM
   }
 }

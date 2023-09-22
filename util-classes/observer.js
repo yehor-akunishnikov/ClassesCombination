@@ -1,12 +1,21 @@
+/*
+  Basic implementation of Observer pattern
+  It can be used for comunications between Controller and DomManipulator
+  For now just skip it
+*/
 export class Observer {
   subscriptions = [];
 
-  subscribe(subscriber) {
-    this.subscriptions.push(subscriber);
+  subscribe(subscription) {
+    this.subscriptions.push(subscription);
   }
 
-  unsubscribe(subscriber) {
-    this.subscriptions = this.subscriptions.filter((sub) => sub !== subscriber);
+  unsubscribe(subscription) {
+    const existingSubIndex = this.subscriptions.indexOf(subscription);
+
+    if (existingSubIndex > -1) {
+      this.subscriptions.splice(existingSubIndex, 1);
+    }
   }
 
   broadcast(...params) {

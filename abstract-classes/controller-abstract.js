@@ -1,15 +1,22 @@
 import { Observer } from '../util-classes/observer.js';
 
+/*
+  Abstract class which provides basic features for the Controller
+  For now just skip it
+*/
 export class ControllerAbstract {
   _subscriptions = {};
 
   constructor(listenersList, domManipulator) {
+    // Here we connect Controller with DomManipulator
     if (domManipulator) {
-      this._actionObserver = new Observer();
+      this._actionObserver = Object.freeze(new Observer());
       domManipulator.attachObserver(this._actionObserver);
       this.domManipulator = Object.freeze(domManipulator);
     }
 
+    // Here we connect Controller methods to events of other
+    // elements on a page
     listenersList.forEach((listenerMeta) => {
       const element = document.getElementById(listenerMeta.id);
 
@@ -21,6 +28,7 @@ export class ControllerAbstract {
     });
   }
 
+  // Method to subscribe on events from DomManipulator
   subscribe(callBack) {
     const subId = (Math.random() + 1).toString(36).substring(7);
 
@@ -30,6 +38,7 @@ export class ControllerAbstract {
     return subId;
   }
 
+  // Method to unsubscribe from DomManipulator events
   unsubscribe(subId) {
     const subscription = this._subscriptions[subId];
 
