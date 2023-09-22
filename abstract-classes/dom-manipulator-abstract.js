@@ -39,7 +39,9 @@ export class DomManipulatorAbstract {
   createDomElement(tagName, payload) {
     const domElement = document.createElement(tagName);
 
-    domElement.setAttribute('data-identifier', payload.id);
+    if (payload.id) {
+      domElement.setAttribute('data-identifier', payload.id);
+    }
 
     return domElement;
   }
